@@ -12,30 +12,13 @@ public class PlayerData
     public BigDouble paintPerSecond;
     public BigDouble nextColorsCost;
 
-    //red
+    //colors
     public BigDouble redUpgradeCost;
     public BigDouble redUpgradePower;
     public BigDouble redUpgradeLevel;
-    //orange
-    public BigDouble orangeUpgradeCost;
-    public BigDouble orangeUpgradePower;
-    public BigDouble orangeUpgradeLevel;
-    //yellow
-    public BigDouble yellowUpgradeCost;
-    public BigDouble yellowUpgradePower;
-    public BigDouble yellowUpgradeLevel;
-    //green
-    public BigDouble greenUpgradeCost;
-    public BigDouble greenUpgradePower;
-    public BigDouble greenUpgradeLevel;
-    //blue
-    public BigDouble blueUpgradeCost;
-    public BigDouble blueUpgradePower;
-    public BigDouble blueUpgradeLevel;
-    //purple
-    public BigDouble purpleUpgradeCost;
-    public BigDouble purpleUpgradePower;
-    public BigDouble purpleUpgradeLevel;
+    public BigDouble colorUpgradeCost[] = new BigDouble[6];
+    public BigDouble colorUpgradePower[] = new BigDouble[6];
+    public BigDouble colorUpgradeLevel[] = new BigDouble[6];
 
     //prestige
     public BigDouble dye;
@@ -61,9 +44,12 @@ public class PlayerData
         nextColorsCost = 15000;
 
         //red
-        redUpgradePower = 1;
-        redUpgradeLevel = 0;
-        redUpgradeCost = 10;
+        colorUpgradePower[0] = 1;
+        colorUpgradeLevel[0] = 0;
+        colorUpgradeCost[0] = 10;
+        //so to continue converting this to arrays just do what i did
+        //[0] is red, [1] is orange, [2] is yellow, [3] is green, [4] is blue, [5] is purple, [6] is the array cap, don't delete it but you can't use it
+        //-flame
         //orange
         orangeUpgradePower = 5;
         orangeUpgradeLevel = 0;
