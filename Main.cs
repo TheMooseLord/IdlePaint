@@ -13,12 +13,9 @@ public class PlayerData
     public BigDouble nextColorsCost;
 
     //colors
-    public BigDouble redUpgradeCost;
-    public BigDouble redUpgradePower;
-    public BigDouble redUpgradeLevel;
-    public BigDouble colorUpgradeCost[] = new BigDouble[6];
-    public BigDouble colorUpgradePower[] = new BigDouble[6];
-    public BigDouble colorUpgradeLevel[] = new BigDouble[6];
+    public BigDouble[] colorUpgradeCost = new BigDouble[6];
+    public BigDouble[] colorUpgradePower = new BigDouble[6];
+    public BigDouble[] colorUpgradeLevel = new BigDouble[6];
 
     //prestige
     public BigDouble dye;
