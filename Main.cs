@@ -7,6 +7,14 @@ using System;
 [Serializable]
 public class PlayerData
 {
+    public short notationType;
+
+    public BigDouble[] challengeLevel = new BigDouble[4];
+
+    public bool isChallenge1Active;
+    public bool isChallenge2Active;
+    public bool isChallenge3Active;
+
     //paint
     public BigDouble paint;
     public BigDouble paintPerSecond;
@@ -38,35 +46,32 @@ public class PlayerData
         //paint
         paint = 10;
         paintPerSecond = 0;
-        nextColorsCost = 15000;
+        nextColorsCost = 7.28e3;
 
-        //red
+        //colors
         colorUpgradePower[0] = 1;
         colorUpgradeLevel[0] = 0;
         colorUpgradeCost[0] = 10;
-        //so to continue converting this to arrays just do what i did
-        //[0] is red, [1] is orange, [2] is yellow, [3] is green, [4] is blue, [5] is purple, [6] is the array cap, don't delete it but you can't use it
-        //-flame
-        //orange
-        orangeUpgradePower = 5;
-        orangeUpgradeLevel = 0;
-        orangeUpgradeCost = 25;
-        //yellow
-        yellowUpgradePower = 25;
-        yellowUpgradeLevel = 0;
-        yellowUpgradeCost = 125;
-        //green
-        greenUpgradePower = 20000;
-        greenUpgradeLevel = 0;
-        greenUpgradeCost = 65000;
-        //blue
-        blueUpgradePower = 100000;
-        blueUpgradeLevel = 0;
-        blueUpgradeCost = 200000;
-        //purple
-        purpleUpgradePower = 225000;
-        purpleUpgradeLevel = 0;
-        purpleUpgradeCost = 500000;
+
+        colorUpgradePower[1] = 5;
+        colorUpgradeLevel[1] = 0;
+        colorUpgradeCost[1] = 25;
+
+        colorUpgradePower[2] = 25;
+        colorUpgradeLevel[2] = 0;
+        colorUpgradeCost[2] = 125;
+
+        colorUpgradePower[3] = 20000;
+        colorUpgradeLevel[3] = 0;
+        colorUpgradeCost[3] = 65000;
+
+        colorUpgradePower[4] = 100000;
+        colorUpgradeLevel[4] = 0;
+        colorUpgradeCost[4] = 200000;
+
+        colorUpgradePower[5] = 225000;
+        colorUpgradeLevel[5] = 0;
+        colorUpgradeCost[5] = 500000;
 
         //dye
         dye = 0;
@@ -82,24 +87,13 @@ public class PlayerData
 public class Main : MonoBehaviour
 {
     public PlayerData data;
-    public int notationType;
 
     //paint
     public Text paintText;
     public Text paintPerSecText;
 
     //red
-    public Text redUpgradeText;
-    //orange
-    public Text orangeUpgradeText;
-    //yellow
-    public Text yellowUpgradeText;
-    //green
-    public Text greenUpgradeText;
-    //blue
-    public Text blueUpgradeText;
-    //purple
-    public Text purpleUpgradeText;
+    public Text[] colorText = new Text[6];
 
     //prestige
     public Text dyeText;
@@ -119,7 +113,7 @@ public class Main : MonoBehaviour
 
     public void Update()
     {
-        data.paintPerSecond = (data.redUpgradeLevel * data.redUpgradePower) + (data.orangeUpgradeLevel * data.orangeUpgradePower) + (data.yellowUpgradeLevel * data.yellowUpgradePower) + (data.greenUpgradeLevel * data.greenUpgradePower) + (data.blueUpgradeLevel * data.blueUpgradePower) + (data.purpleUpgradeLevel * data.purpleUpgradePower);
+        data.paintPerSecond = (data.colorUpgradeLevel[0] * data.colorUpgradePower[0]) + (data.colorUpgradeLevel[1] * data.colorUpgradePower[1]) + (data.colorUpgradeLevel[2] * data.colorUpgradePower[2]) + (data.colorUpgradeLevel[3] * data.colorUpgradePower[3]) + (data.colorUpgradeLevel[4] * data.colorUpgradePower[4]) + (data.colorUpgradeLevel[4] * data.colorUpgradePower[4]);
 
         //prestige
         data.dyeToGet = (150 * Sqrt(data.paint / 5e5));
@@ -133,13 +127,10 @@ public class Main : MonoBehaviour
         paintText.text = $"paint: {Methods.NotationMethod(data.paint, "F0")}";
         paintPerSecText.text = $"{Methods.NotationMethod(data.paintPerSecond, "F0")} paint/s";
 
-        //red
-        redUpgradeText.text = $"Upgrade\n+{Methods.NotationMethod(data.redUpgradePower, "F0")} Paint/s\n {Methods.NotationMethod(data.redUpgradeCost, "F0")} Paint\nLevel: {Methods.NotationMethod(data.redUpgradeLevel, "F0")}";
-        orangeUpgradeText.text = $"Upgrade\n+{Methods.NotationMethod(data.orangeUpgradePower, "F0")} Paint/s\n {Methods.NotationMethod(data.orangeUpgradeCost, "F0")} Paint\nLevel: {Methods.NotationMethod(data.orangeUpgradeLevel, "F0")}";
-        yellowUpgradeText.text = $"Upgrade\n+{Methods.NotationMethod(data.yellowUpgradePower, "F0")} Paint/s\n {Methods.NotationMethod(data.yellowUpgradeCost, "F0")} Paint\nLevel: {Methods.NotationMethod(data.yellowUpgradeLevel, "F0")}";
-        greenUpgradeText.text = $"Upgrade\n+{Methods.NotationMethod(data.greenUpgradePower, "F0")} Paint/s\n {Methods.NotationMethod(data.greenUpgradeCost, "F0")} Paint\nLevel: {Methods.NotationMethod(data.greenUpgradeLevel, "F0")}";
-        blueUpgradeText.text = $"Upgrade\n+{Methods.NotationMethod(data.blueUpgradePower, "F0")} Paint/s\n {Methods.NotationMethod(data.blueUpgradeCost, "F0")} Paint\nLevel: {Methods.NotationMethod(data.blueUpgradeLevel, "F0")}";
-        purpleUpgradeText.text = $"Upgrade\n+{Methods.NotationMethod(data.purpleUpgradePower, "F0")} Paint/s\n {Methods.NotationMethod(data.purpleUpgradeCost, "F0")} Paint\nLevel: {Methods.NotationMethod(data.purpleUpgradeLevel, "F0")}";
+        for (int i = 0; i < colorText.Length; i++)
+        {
+            colorText[i].text = $"Upgrade\n+{Methods.NotationMethod(data.colorUpgradePower[i], "F0")} Paint/s\n {Methods.NotationMethod(data.colorUpgradeCost[i], "F0")} Paint\nLevel: {Methods.NotationMethod(data.colorUpgradeLevel[i], "F0")}";
+        }
 
         data.paint += data.paintPerSecond * Time.deltaTime;
         SaveSystem.SavePlayer(data);

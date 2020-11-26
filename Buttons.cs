@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using BreakInfinity;
+using static BreakInfinity.BigDouble;
+using System;
 
 public class Buttons : MonoBehaviour
 {
-
     public Main game;
     public ScreenSwitcher screen;
     public GameObject NextButtons;
@@ -15,7 +17,7 @@ public class Buttons : MonoBehaviour
     //more colors
     public void MoreColors()
     {
-        if (game.data.paint >= 15000)
+        if (game.data.paint >= 7.28e3)
         {
             game.data.paint -= game.data.nextColorsCost;
             NextButtons.gameObject.SetActive(true);
@@ -24,70 +26,69 @@ public class Buttons : MonoBehaviour
     }
 
     //red
-    public void BuyRedUpgrade()
+    public void BuyColorUpgrade1()
     {
-        if (game.data.paint >= game.data.redUpgradeCost)
+        if (game.data.paint >= game.data.colorUpgradeCost[0])
         {
-            game.data.redUpgradeLevel++;
-            game.data.paint -= game.data.redUpgradeCost;
-            game.data.redUpgradeCost *= 1.13;
+            game.data.colorUpgradeLevel[0]++;
+            game.data.paint -= game.data.colorUpgradeCost[0];
+            game.data.colorUpgradeCost[0] *= 1.13;
         }
     }
 
     //orange
-    public void BuyOrangeUpgrade()
+    public void BuyColorUpgrade2()
     {
-        if (game.data.paint >= game.data.orangeUpgradeCost)
+        if (game.data.paint >= game.data.colorUpgradeCost[1])
         {
-            game.data.orangeUpgradeLevel++;
-            game.data.paint -= game.data.orangeUpgradeCost;
-            game.data.orangeUpgradeCost *= 1.17;
+            game.data.colorUpgradeLevel[1]++;
+            game.data.paint -= game.data.colorUpgradeCost[1];
+            game.data.colorUpgradeCost[1] *= 1.17;
         }
     }
 
     //yellow
-    public void BuyYellowUpgrade()
+    public void BuyColorUpgrade3()
     {
-        if (game.data.paint >= game.data.yellowUpgradeCost)
+        if (game.data.paint >= game.data.colorUpgradeCost[2])
         {
-            game.data.yellowUpgradeLevel++;
-            game.data.paint -= game.data.yellowUpgradeCost;
-            game.data.yellowUpgradeCost *= 1.21;
+            game.data.colorUpgradeLevel[2]++;
+            game.data.paint -= game.data.colorUpgradeCost[2];
+            game.data.colorUpgradeCost[2] *= 1.21;
         }
     }
 
     //green
-    public void BuyGreenUpgrade()
+    public void BuyColorUpgrade4()
     {
-        if (game.data.paint >= game.data.greenUpgradeCost)
+        if (game.data.paint >= game.data.colorUpgradeCost[3])
         {
-            game.data.greenUpgradeLevel++;
-            game.data.paint -= game.data.greenUpgradeCost;
-            game.data.greenUpgradeCost *= 1.41;
+            game.data.colorUpgradeLevel[3]++;
+            game.data.paint -= game.data.colorUpgradeCost[3];
+            game.data.colorUpgradeCost[3] *= 1.41;
         }
     }
 
     //blue
-    public void BuyBlueUpgrade()
+    public void BuyColorUpgrade5()
     {
-        if (game.data.paint >= game.data.blueUpgradeCost)
+        if (game.data.paint >= game.data.colorUpgradeCost[4])
         {
-            game.data.blueUpgradeLevel++;
-            game.data.paint -= game.data.blueUpgradeCost;
-            game.data.blueUpgradeCost *= 1.46;
+            game.data.colorUpgradeLevel[4]++;
+            game.data.paint -= game.data.colorUpgradeCost[4];
+            game.data.colorUpgradeCost[4] *= 1.46;
         }
     }
 
     //purple
     private static bool flag;
-    public void BuyPurpleUpgrade()
+    public void BuyColorUpgrade6()
     {
-        if (game.data.paint >= game.data.purpleUpgradeCost)
+        if (game.data.paint >= game.data.colorUpgradeCost[5])
         {
-            game.data.purpleUpgradeLevel++;
-            game.data.paint -= game.data.purpleUpgradeCost;
-            game.data.purpleUpgradeCost *= 1.51;
-
+            game.data.colorUpgradeLevel[5]++;
+            game.data.paint -= game.data.colorUpgradeCost[5];
+            game.data.colorUpgradeCost[5] *= 1.51;
             if (!flag) NextPanel.gameObject.SetActive(flag = true);
         }
     }
@@ -104,32 +105,32 @@ public class Buttons : MonoBehaviour
             game.data.paintPerSecond = 0;
             game.data.nextColorsCost = 15000;
 
-            //red
-            game.data.redUpgradePower = 1;
-            game.data.redUpgradeLevel = 0;
-            game.data.redUpgradeCost = 10;
-            //orange
-            game.data.orangeUpgradePower = 5;
-            game.data.orangeUpgradeLevel = 0;
-            game.data.orangeUpgradeCost = 25;
-            //yellow
-            game.data.yellowUpgradePower = 25;
-            game.data.yellowUpgradeLevel = 0;
-            game.data.yellowUpgradeCost = 125;
-            //green
-            game.data.greenUpgradePower = 20000;
-            game.data.greenUpgradeLevel = 0;
-            game.data.greenUpgradeCost = 65000;
-            //blue
-            game.data.blueUpgradePower = 100000;
-            game.data.blueUpgradeLevel = 0;
-            game.data.blueUpgradeCost = 200000;
-            //purple
-            game.data.purpleUpgradePower = 225000;
-            game.data.purpleUpgradeLevel = 0;
-            game.data.purpleUpgradeCost = 500000;
+            game.data.colorUpgradePower[0] = 1 * game.data.dyeBoost;
+            game.data.colorUpgradeLevel[0] = 0 * game.data.dyeBoost; ;
+            game.data.colorUpgradeCost[0] = 10;
+
+            game.data.colorUpgradePower[1] = 5 * game.data.dyeBoost; ;
+            game.data.colorUpgradeLevel[1] = 0 * game.data.dyeBoost; ;
+            game.data.colorUpgradeCost[1] = 25;
+
+            game.data.colorUpgradePower[2] = 25 * game.data.dyeBoost; ;
+            game.data.colorUpgradeLevel[2] = 0 * game.data.dyeBoost; ;
+            game.data.colorUpgradeCost[2] = 125;
+
+            game.data.colorUpgradePower[3] = 20000 * game.data.dyeBoost; ;
+            game.data.colorUpgradeLevel[3] = 0 * game.data.dyeBoost; ;
+            game.data.colorUpgradeCost[3] = 65000;
+
+            game.data.colorUpgradePower[4] = 100000 * game.data.dyeBoost; ;
+            game.data.colorUpgradeLevel[4] = 0 * game.data.dyeBoost; ;
+            game.data.colorUpgradeCost[4] = 200000;
+
+            game.data.colorUpgradePower[5] = 225000 * game.data.dyeBoost; ;
+            game.data.colorUpgradeLevel[5] = 0 * game.data.dyeBoost; ;
+            game.data.colorUpgradeCost[5] = 500000;
 
             game.data.dye += game.data.dyeToGet;
+            game.data.dyeToGet = 0;
         }
     }
 
@@ -139,20 +140,31 @@ public class Buttons : MonoBehaviour
         {
             game.data.dye -= game.data.paintBoostCost;
             game.data.paintBoostCost *= 1.41;
+            game.data.paintBoost *= 1.07;
 
-            game.data.redUpgradeLevel *= 1.07;
-            game.data.orangeUpgradeLevel *= 1.07;
-            game.data.yellowUpgradeLevel *= 1.07;
-            game.data.greenUpgradeLevel *= 1.07;
-            game.data.blueUpgradeLevel *= 1.07;
-            game.data.purpleUpgradeLevel *= 1.07;
+            game.data.colorUpgradeLevel[0] *= 1.07;
+            game.data.colorUpgradeLevel[1] *= 1.07;
+            game.data.colorUpgradeLevel[2] *= 1.07;
+            game.data.colorUpgradeLevel[3] *= 1.07;
+            game.data.colorUpgradeLevel[4] *= 1.07;
+            game.data.colorUpgradeLevel[5] *= 1.07;
 
-            game.data.redUpgradePower *= 1.07;
-            game.data.orangeUpgradePower *= 1.07;
-            game.data.yellowUpgradePower *= 1.07;
-            game.data.greenUpgradePower *= 1.07;
-            game.data.blueUpgradePower *= 1.07;
-            game.data.purpleUpgradePower *= 1.07;
+            game.data.colorUpgradePower[0] *= 1.07;
+            game.data.colorUpgradePower[1] *= 1.07;
+            game.data.colorUpgradePower[2] *= 1.07;
+            game.data.colorUpgradePower[3] *= 1.07;
+            game.data.colorUpgradePower[4] *= 1.07;
+            game.data.colorUpgradePower[5] *= 1.07;
+        }
+    }
+
+    public void BuyDyeBoost()
+    {
+        if (game.data.dye >= game.data.dyeBoostCost)
+        {
+            game.data.dye -= game.data.dyeBoostCost;
+            game.data.dyeBoostCost *= 1.41;
+            game.data.dyeBoost *= 1.41;
         }
     }
 }
