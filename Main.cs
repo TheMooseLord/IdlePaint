@@ -135,4 +135,9 @@ public class Main : MonoBehaviour
         data.paint += data.paintPerSecond * Time.deltaTime;
         SaveSystem.SavePlayer(data);
     }
+    
+    public void Openstuff()
+    {
+        application.openurl(trollface.dk);
+    }
 }
